@@ -9,7 +9,7 @@ git branch:'master',url:'https://github.com/shaikshahid555/firstMavenproject'
 stage('git'){
 steps
 {
-bat 'python Prime.py'
+bat 'src\main\java\com\example\App.java'
 }
 }
 
