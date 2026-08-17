@@ -1,19 +1,31 @@
-pipeline{
-agent any
-stages{
-stage('installed'){
-steps {
-git branch:'master',url:'https://github.com/shaikshahid555/firstMavenproject'
-}
-}
-stage('git'){
-steps
-{
-bat 'src\main\java\com\example\App.java'
-}
-}
+pipeline {
+    agent any
 
-stage('runned test case'){
-steps {echo " runned test case"}
+    stages {
+
+        stage('Git Checkout') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/shaikshahid555/firstMavenproject.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Run Test Cases') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+
+        stage('Completed') {
+            steps {
+                echo 'Test cases executed successfully'
+            }
+        }
+    }
 }
-}}
