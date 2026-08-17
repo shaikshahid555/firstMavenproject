@@ -16,15 +16,9 @@ pipeline {
             }
         }
 
-        stage('Run Test Cases') {
+        stage('Run App') {
             steps {
-                bat 'mvn test'
-            }
-        }
-
-        stage('Completed') {
-            steps {
-                echo 'Test cases executed successfully'
+                bat 'java -cp target/classes com.example.App'
             }
         }
     }
