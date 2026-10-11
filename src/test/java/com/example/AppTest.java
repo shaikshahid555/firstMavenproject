@@ -1,38 +1,43 @@
+
 package com.example;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+public class AppTest {
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testWebsiteTitle() {
+
+        ChromeOptions options = new ChromeOptions();
+
+        // Run browser without displaying a window
+        options.addArguments("--headless");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        try {
+            // Open a practice webpage
+            driver.get(
+                "https://www.selenium.dev/selenium/web/web-form.html"
+            );
+
+            // Get the webpage title
+            String title = driver.getTitle();
+
+            System.out.println("Website title: " + title);
+
+            // Verify the title
+            assertTrue(title.contains("Web form"));
+
+            System.out.println("Selenium test passed!");
+
+        } finally {
+            driver.quit();
+        }
     }
 }

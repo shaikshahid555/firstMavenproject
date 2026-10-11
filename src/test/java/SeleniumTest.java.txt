@@ -1,0 +1,33 @@
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class SeleniumTest {
+
+    @Test
+    public void testWebsite() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        try {
+            driver.get(
+                "https://www.selenium.dev/selenium/web/web-form.html"
+            );
+
+            String title = driver.getTitle();
+
+            assertTrue(title.contains("Web form"));
+
+            System.out.println("Selenium test passed!");
+
+        } finally {
+            driver.quit();
+        }
+    }
+}
